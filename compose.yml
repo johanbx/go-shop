@@ -6,6 +6,7 @@ services:
       - 8080:8080
     environment:
       LIVE_RELOAD: true
+      SQLITE_URI: "./dev.db"
     volumes:
       - .:/app
   

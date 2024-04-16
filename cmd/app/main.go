@@ -1,7 +1,8 @@
 package main
 
 import (
-	handler "johanbx/go-web-server-2/internal"
+	"johanbx/go-web-server-2/internal/db"
+	handler "johanbx/go-web-server-2/internal/handler"
 	"net/http"
 	"os"
 
@@ -10,6 +11,8 @@ import (
 )
 
 func main() {
+	db.InitDB(os.Getenv("SQLITE_URI"))
+
 	r := gin.Default()
 	r.Use(gzip.Gzip(gzip.DefaultCompression))
 

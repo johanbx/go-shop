@@ -12,4 +12,7 @@ sh:
 
 prod:
 	docker build -t johanbx:prod -f docker/Dockerfile .
-	docker run -e GIN_MODE=release -p 8080:8080 johanbx:prod
+	docker run -v $$(pwd)/dev.db:/app/db/dev.db:rw -e GIN_MODE=release -e SQLITE_URI=./db/dev.db -p 8080:8080 johanbx:prod
+
+test:
+	echo $$(pwd)
