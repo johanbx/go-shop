@@ -5,16 +5,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Register(r *gin.Engine) {
+func PageRoutes(r *gin.Engine) {
 	r.HTMLRender = renderer()
 
-	r.POST("/catalog/item", PostCreateCatalogItem)
-	r.GET("/catalog", GetAllCatalogItems)
+	r.POST("/catalog/item", CatalogItemHandler)
+	r.GET("/catalog/item", CatalogItemHandler)
+
 	r.GET("/", PageIndex)
 }
 
 func renderer() multitemplate.Renderer {
 	r := multitemplate.NewRenderer()
-	r = PageRenderer(r)
+	RootPageRenderer(r)
+	CatalogPageRenderer(r)
 	return r
 }

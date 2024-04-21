@@ -1,10 +1,17 @@
-# ignore everything
+# = INVERTED DOCKER IGNORE =
+
+# == IGNORE ALL ==
 *
 
-# except these
-!go.mod
-!go.sum
+# == EXCEPT THESE ==
+
+# FOLDERS
 !cmd
 !templates
 !internal
 !assets
+
+# FILES
+!go.mod
+!go.sum
+!tailwind.config.js

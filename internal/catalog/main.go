@@ -20,3 +20,10 @@ func NewCatalogRepository(db *gorm.DB) *CatalogRepository {
 func (repo *CatalogRepository) Create(catalogItem *CatalogItem) error {
 	return repo.db.Create(catalogItem).Error
 }
+
+func (repo *CatalogRepository) List() ([]CatalogItem, error) {
+	var items []CatalogItem
+	err := repo.db.Model(&CatalogItem{}).Order("created_at DESC").Find(&items).Error
+
+	return items, err
+}

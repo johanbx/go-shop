@@ -16,3 +16,11 @@ services:
       context: .
     ports:
       - 5555:5555
+  
+  tailwind:
+    build:
+      dockerfile: docker/Dockerfile.tailwind
+      context: .
+    command:  ["./tailwindcss", "-c", "project/tailwind.config.js", "-i", "project/assets/dev.css", "-o", "project/assets/style.css", "--watch"]
+    volumes:
+      - .:/tailwind/project/

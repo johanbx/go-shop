@@ -1,3 +1,5 @@
 bin
 tmp
 *.db
+
+assets/style.css

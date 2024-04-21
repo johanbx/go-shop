@@ -10,13 +10,28 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
   <link rel="manifest" href="/assets/favicon/site.webmanifest">
 
-  <link rel="stylesheet" href="/assets/pico.fluid.classless.slate.min.css" />
+  <!--link rel="stylesheet" href="/assets/pico.fluid.classless.slate.min.css" /-->
+  <link rel="stylesheet" href="/assets/style.css" />
+
   <script src="/assets/htmx.min.js"></script>
-  <title>{{block "title" .}}Go web server{{end}}</title>
+  <script src="/assets/response-targets.js"></script>
+  <title>{{.title}}</title>
 </head>
 
-<body>
-  {{block "content" .}}{{end}}
+<body hx-ext="response-targets">
+  <header class="flex">
+    <nav>
+      <ul>
+        <li><strong>Acme Shop</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+  {{template "content" .}}
 
   {{if .LIVE_RELOAD}}
   <script>
@@ -24,6 +39,8 @@
     socket.onmessage = event => event.data === 'reload' && window.location.reload();
   </script>
   {{end}}
+
+  <script src="/assets/script.js"></script>
 </body>
 
 </html>

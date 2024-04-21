@@ -1,0 +1,52 @@
+{{define "content"}}
+
+<main>
+  <section>
+    <article>
+      <h2>New catalog item</h2>
+
+      <form method="post" action="/catalog/item" hx-post="/catalog/item" hx-target-400="main" hx-target-500="main"
+        hx-target="main" hx-swap="outerHTML" hx-select="main" data-new-title="{{.title}}">
+
+        <label>
+          Product name
+          <input type="text" required="required" {{if .validationError.name}}aria-invalid="true"
+            aria-describedby="invalid-helper" {{end}}{{if .createdCatalogItem}}aria-invalid="false"
+            aria-describedby="valid-helper" {{end}} name="name" placeholder="Product name">
+          {{if .validationError.name}}
+          <small id="invalid-helper">
+            {{.validationError.name}}
+          </small>
+          {{end}}
+          {{if .createdCatalogItem}}
+          <small id="valid-helper">
+            Successfully created item "{{.createdCatalogItem.Name}}"
+          </small>
+          {{end}}
+
+          {{ if .errorMessage }}
+          <div class="toast toast-error m-2">
+            There was a serious error: {{ .errorMessage }}
+          </div>
+          {{end}}
+        </label>
+
+        <input type="submit" value="Add">
+      </form>
+    </article>
+  </section>
+
+  {{ if .catalogItems }}
+  <section>
+    <article>
+      <ul>
+        {{ range .catalogItems }}
+        <li>{{.Name}}</li>
+        {{end}}
+      </ul>
+    </article>
+  </section>
+  {{end}}
+</main>
+
+{{end}}
